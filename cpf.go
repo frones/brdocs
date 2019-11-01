@@ -7,7 +7,7 @@ import (
 )
 
 func ValidaCPF(cpf string) bool {
-	if r, err := regexp.MatchString(`^\d{3}\.\d{3}\.\d{3}-\d{2}|\d{11}$`, cpf); err != nil || !r {
+	if r, err := regexp.MatchString(`^\d{3}\.\d{3}\.\d{3}-\d{2}$|^\d{11}$`, cpf); err != nil || !r {
 		return false
 	}
 

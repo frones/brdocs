@@ -7,7 +7,7 @@ import (
 )
 
 func ValidaCNPJ(cnpj string) bool {
-	if r, err := regexp.MatchString(`^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}|\d{14}$`, cnpj); err != nil || !r {
+	if r, err := regexp.MatchString(`^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$|^\d{14}$`, cnpj); err != nil || !r {
 		return false
 	}
 
