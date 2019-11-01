@@ -1,7 +1,6 @@
 package gobr
 
 import (
-	"fmt"
 	"regexp"
 	"strings"
 )
