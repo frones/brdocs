@@ -389,7 +389,8 @@ func ValidaIE(ie string, uf string) bool {
 				return false
 			}
 
-			dv, _ = modulo11(ie[:len(ie)-2], 10)
+			_, sum = modulo11(ie[:len(ie)-1], 10)
+			dv = (sum % 11) % 10
 			return dv == int(ie[11]-'0')
 		}
 	case "SE":
