@@ -191,6 +191,9 @@ func ValidaIE(ie string, uf string) bool {
 			return dv == int(ie[len(ie)-1]-'0')
 		}
 	case "MT":
+		if r, err := regexp.MatchString(`^\d{8}-\d$|^\d{9}$`, ie); err == nil && r {
+			ie = "00" + ie
+		}
 		if r, err := regexp.MatchString(`^\d{10}-\d$|^\d{11}$`, ie); err != nil || !r {
 			return false
 		} else {
