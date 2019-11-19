@@ -1,7 +1,6 @@
 package gobr
 
 import (
-	"fmt"
 	"regexp"
 	"strings"
 )
@@ -39,14 +38,13 @@ func ValidaCPF(cpf string) bool {
 	return true
 }
 
-func FormataCPF(cpf string) (string, error) {
-	if !ValidaCPF(cpf) {
-		return "", fmt.Errorf("CPF inválido: %s", cpf)
+func FormataCPF(cpf string) string {
+	cpf = strings.Replace(cpf, ".", "", -1)
+	cpf = strings.Replace(cpf, "-", "", -1)
+
+	if len(cpf) < 11 {
+		cpf = cpf + strings.Repeat(" ", 11-len(cpf))
 	}
 
-	if len(cpf) == 11 {
-		return cpf[:3] + "." + cpf[3:6] + "." + cpf[6:9] + "-" + cpf[9:], nil
-	} else {
-		return cpf, nil
-	}
+	return cpf[:3] + "." + cpf[3:6] + "." + cpf[6:9] + "-" + cpf[9:]
 }

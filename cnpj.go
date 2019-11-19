@@ -1,7 +1,6 @@
 package gobr
 
 import (
-	"fmt"
 	"regexp"
 	"strings"
 )
@@ -40,14 +39,14 @@ func ValidaCNPJ(cnpj string) bool {
 	return true
 }
 
-func FormataCNPJ(cnpj string) (string, error) {
-	if !ValidaCNPJ(cnpj) {
-		return "", fmt.Errorf("CNPJ inválido: %s", cnpj)
+func FormataCNPJ(cnpj string) string {
+	cnpj = strings.Replace(cnpj, ".", "", -1)
+	cnpj = strings.Replace(cnpj, "/", "", -1)
+	cnpj = strings.Replace(cnpj, "-", "", -1)
+
+	if len(cnpj) < 14 {
+		cnpj = cnpj + strings.Repeat(" ", 14-len(cnpj))
 	}
 
-	if len(cnpj) == 14 {
-		return cnpj[:2] + "." + cnpj[2:5] + "." + cnpj[5:8] + "/" + cnpj[8:12] + "-" + cnpj[12:], nil
-	} else {
-		return cnpj, nil
-	}
+	return cnpj[:2] + "." + cnpj[2:5] + "." + cnpj[5:8] + "/" + cnpj[8:12] + "-" + cnpj[12:]
 }
