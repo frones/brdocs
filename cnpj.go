@@ -1,6 +1,7 @@
 package gobr
 
 import (
+	"github.com/frones/strmask"
 	"regexp"
 	"strings"
 )
@@ -40,13 +41,5 @@ func ValidaCNPJ(cnpj string) bool {
 }
 
 func FormataCNPJ(cnpj string) string {
-	cnpj = strings.Replace(cnpj, ".", "", -1)
-	cnpj = strings.Replace(cnpj, "/", "", -1)
-	cnpj = strings.Replace(cnpj, "-", "", -1)
-
-	if len(cnpj) < 14 {
-		cnpj = cnpj + strings.Repeat(" ", 14-len(cnpj))
-	}
-
-	return cnpj[:2] + "." + cnpj[2:5] + "." + cnpj[5:8] + "/" + cnpj[8:12] + "-" + cnpj[12:]
+	return strmask.FormatMask("00.000.000/0000-00;0", cnpj)
 }

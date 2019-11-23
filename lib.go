@@ -18,3 +18,13 @@ func isNumber(s string) bool {
 
 	return true
 }
+
+func getNumbers(s string) string {
+	var output string
+	for _, d := range s {
+		if unicode.IsDigit(d) {
+			output += string(d)
+		}
+	}
+	return output
+}

@@ -1,6 +1,7 @@
 package gobr
 
 import (
+	"github.com/frones/strmask"
 	"regexp"
 	"strings"
 )
@@ -39,12 +40,5 @@ func ValidaCPF(cpf string) bool {
 }
 
 func FormataCPF(cpf string) string {
-	cpf = strings.Replace(cpf, ".", "", -1)
-	cpf = strings.Replace(cpf, "-", "", -1)
-
-	if len(cpf) < 11 {
-		cpf = cpf + strings.Repeat(" ", 11-len(cpf))
-	}
-
-	return cpf[:3] + "." + cpf[3:6] + "." + cpf[6:9] + "-" + cpf[9:]
+	return strmask.FormatMask("000.000.000-00;0", cpf)
 }

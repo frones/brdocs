@@ -1,6 +1,7 @@
 package gobr
 
 import (
+	"github.com/frones/strmask"
 	"regexp"
 	"strings"
 )
@@ -414,5 +415,64 @@ func ValidaIE(ie string, uf string) bool {
 		return dv == int(ie[len(ie)-1]-'0')
 	default:
 		return false
+	}
+}
+
+func FormataIE(ie string, uf string) string {
+	switch strings.ToUpper(uf) {
+	case "AC":
+		return strmask.FormatMask("00.000.000/000-00;0;1", ie)
+	case "AL", "AP":
+		return strmask.FormatMask("000000000;0;1", ie)
+	case "AM":
+		return strmask.FormatMask("00.000.000-0;0;1", ie)
+	case "BA":
+		if len(getNumbers(ie)) >= 9 {
+			return strmask.FormatMask("0000000-00;0;1", ie)
+		} else {
+			return strmask.FormatMask("000000-00;0;1", ie)
+		}
+	case "CE", "ES", "MA", "MS", "PB", "PI", "RR", "SE":
+		return strmask.FormatMask("00000000-0;0;1", ie)
+	case "DF":
+		return strmask.FormatMask("00000000000-00;0;1", ie)
+	case "GO":
+		return strmask.FormatMask("00.000.000-0;0;1", ie)
+	case "MT", "TO":
+		return strmask.FormatMask("0000000000-0;0;1", ie)
+	case "MG":
+		return strmask.FormatMask("000.000.000/0000;0;1", ie)
+	case "PA":
+		return strmask.FormatMask("00-000000-0;0;1", ie)
+	case "PR":
+		return strmask.FormatMask("000.00000-00;0;1", ie)
+	case "PE":
+		return strmask.FormatMask("0000000-00;0;1", ie)
+	case "RJ":
+		return strmask.FormatMask("00.000.00-0;0;1", ie)
+	case "RN":
+		if len(getNumbers(ie)) >= 10 {
+			return strmask.FormatMask("00.0.000.000-0;0;1", ie)
+		} else {
+			return strmask.FormatMask("00.000.000-0;0;1", ie)
+		}
+	case "RS":
+		return strmask.FormatMask("000/0000000;0;1", ie)
+	case "RO":
+		if len(getNumbers(ie)) >= 14 {
+			return strmask.FormatMask("0000000000000-0;0;1", ie)
+		} else {
+			return strmask.FormatMask("000.00000-0;0;1", ie)
+		}
+	case "SC":
+		return strmask.FormatMask("000.000.000;0;1", ie)
+	case "SP":
+		if len(ie) > 0 && ie[0] == 'P' {
+			return strmask.FormatMask("P-00000000.0/000;0", ie)
+		} else {
+			return strmask.FormatMask("000.000.000.000;0;1", ie)
+		}
+	default:
+		return ""
 	}
 }
