@@ -1,5 +1,5 @@
 // Conjunto de funções para validação e formatação de documentos brasileiros
-package gobr
+package brdocs
 
 import (
 	"unicode"

@@ -1,4 +1,4 @@
-package gobr
+package brdocs
 
 import (
 	"github.com/frones/strmask"
